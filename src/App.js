@@ -31,28 +31,30 @@ function Tabuleiro({ xIsNext, squares, onPlay }) {
   let status;
 
   if (vencedor) {
-    status = 'Vencedor: ' + vencedor;
+    status = ` PARABÉNS! O jogador ${vencedor} venceu! `;
   } else {
     status = 'Próximo jogador: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
     <>
-      <div className="status">{status}</div>
+      <div className={vencedor ? 'status vencedor' : 'status'}>
+        {status}
+      </div>
 
-      <div>
+      <div className="board-row">
         <Square valor={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square valor={squares[1]} onSquareClick={() => handleClick(1)} />
         <Square valor={squares[2]} onSquareClick={() => handleClick(2)} />
       </div>
 
-      <div>
+      <div className="board-row">
         <Square valor={squares[3]} onSquareClick={() => handleClick(3)} />
         <Square valor={squares[4]} onSquareClick={() => handleClick(4)} />
         <Square valor={squares[5]} onSquareClick={() => handleClick(5)} />
       </div>
 
-      <div>
+      <div className="board-row">
         <Square valor={squares[6]} onSquareClick={() => handleClick(6)} />
         <Square valor={squares[7]} onSquareClick={() => handleClick(7)} />
         <Square valor={squares[8]} onSquareClick={() => handleClick(8)} />
@@ -107,6 +109,8 @@ export default function Game() {
   return (
     <div className="game">
       <div className="game-board">
+        <h1>Jogo da Velha</h1>
+
         <Tabuleiro
           xIsNext={xIsNext}
           squares={currentSquares}
@@ -115,6 +119,7 @@ export default function Game() {
       </div>
 
       <div className="game-info">
+        <h2>Histórico</h2>
         <ol>{moves}</ol>
       </div>
     </div>
